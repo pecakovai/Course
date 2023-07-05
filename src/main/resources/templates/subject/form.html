@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subject Page</title>
+</head>
+<style>
+
+    .form-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .custom-form {
+        width: 400px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+</style>
+<body>
+<div th:replace="/layout/layout :: navbar-inside"></div>
+
+
+<div class="form-container">
+    <div class="container">
+        <form class="custom-form" method="post"th:action="${subject} ? @{/edit/subject/{id} (id=${subject?.id})} : @{/add/subject}">
+            <div class="mb-3">
+                <label for="input1" class="form-label">Name - Year</label>
+                <input type="text" class="form-control" id="input1" name="name" th:value="${subject?.name}">
+            </div>
+
+            <div class="mb-3">
+                <label for="input2" class="form-label">Semester</label>
+                <select id="input2" name="semester" class="form-select">
+                    <option th:each="semester : ${semesters}" th:value="${semester.id}" th:text="|${semester.type} - ${semester.year}|" th:selected="${subject?.semester?.id} == ${semester.id}"></option>
+                </select>
+            </div>
+
+            <div style="text-align: center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

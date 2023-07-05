@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Semester Page</title>
+</head>
+<body>
+
+<div th:replace="/layout/layout :: navbar-inside"></div>
+
+<br>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Semester Type</th>
+        <th scope="col">Year</th>
+        <th scope="col">Action #1</th>
+        <th scope="col">Action #2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="semester, num : ${semesters}">
+        <th scope="row" th:text="${num.count}"></th>
+        <td th:text="${semester.type}"></td>
+        <td th:text="${semester.year}"></td>
+        <td>
+            <form method="get" th:action="@{'/edit/semester/{id}' (id = ${semester.id})}" >
+                <button type="submit" class="btn btn-outline-primary">Edit</button>
+            </form>
+        </td>
+        <td>
+            <form method="post" th:action="@{'/delete/semester/{id}' (id = ${semester.id})}" >
+                <button type="submit" class="btn btn-outline-primary">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

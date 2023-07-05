@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enroll Professor Page</title>
+
+    <style>
+        .form-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .custom-form {
+            width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div th:replace="/layout/layout :: navbar-inside"></div>
+
+<div class="form-container">
+    <div class="container">
+        <form class="custom-form" method="post" action="/enroll/professor">
+
+            <select class="form-select" multiple aria-label="multiple select example" name="professors">
+                <option th:each="professor : ${professors}" th:value="${professor.id}" th:text="|${professor.firstName} ${professor.lastName}|"></option>
+            </select>
+
+            <br>
+
+            <select class="form-select" multiple aria-label="multiple select example" name="subjects">
+                <option th:each="subject : ${subjects}" th:value="${subject.id}" th:text="${subject.name}"></option>
+            </select>
+
+            <br>
+
+            <div style="text-align: center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

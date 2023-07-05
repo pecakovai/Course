@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subject Page</title>
+
+    <style>
+
+        .form-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .custom-form {
+            width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div th:replace="/layout/layout :: navbar-inside"></div>
+
+<div class="form-container">
+    <div class="container">
+        <form class="custom-form" method="post" th:action="${flag} ? @{/add/file/lecture} : @{/add/file/exercise}" enctype="multipart/form-data">
+            <input type="text" name="id" th:value="${id}" hidden/>
+            <div class="mb-3">
+                <label for="input1" class="form-label">File Name</label>
+                <input type="text" class="form-control" id="input1" name="fileName">
+            </div>
+            <div class="mb-3">
+                <label for="input2" class="form-label">Choose file</label>
+                <input type="file" class="form-control" id="input2" name="file" placeholder="File">
+            </div>
+
+            <div style="text-align: center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subject Page</title>
+</head>
+<body>
+
+<div th:replace="/layout/layout :: navbar-inside"></div>
+
+<br>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Action #1</th>
+        <th scope="col">Action #2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="subject, num : ${subjects}">
+        <th scope="row" th:text="${num.count}"></th>
+        <td th:text="${subject.name}"></td>
+        <td>
+            <form method="get" th:action="@{'/edit/subject/{id}' (id = ${subject.id})}" >
+                <button type="submit" class="btn btn-outline-primary">Edit</button>
+            </form>
+        </td>
+        <td>
+            <form method="post" th:action="@{'/delete/subject/{id}' (id = ${subject.id})}" >
+                <button type="submit" class="btn btn-outline-primary">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
