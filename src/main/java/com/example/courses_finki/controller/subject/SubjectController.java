@@ -40,6 +40,13 @@ public class SubjectController {
         return "subject/subject";
     }
 
+    @GetMapping("/all-subjects")
+    public String getAllSubjects(Model model) {
+        model.addAttribute("subjects", subjectService.getAllSubjects().stream().filter(s -> !s.isFree()).toList());
+
+        return "cart/list_of_subjects";
+    }
+
     @GetMapping("/add/subject")
     public String getAddSubjectPage(Model model) {
         model.addAttribute("semesters", semesterService.getAllSemesters());

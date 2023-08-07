@@ -35,17 +35,27 @@ public class SubjectEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "subject")
     private List<FileEntity> files;
 
+    private boolean isFree;
+
+    private double price;
+
     public SubjectEntity() {
     }
 
+    public SubjectEntity(String name,boolean isFree,double price) {
+        this.name = name;
+        this.isFree = isFree;
+        this.price = price;
+    }
     public SubjectEntity(String name) {
         this.name = name;
     }
 
-    public SubjectEntity(String name, List<UserEntity> professors, SemesterEntity semester) {
+    public SubjectEntity(String name, List<UserEntity> professors, SemesterEntity semester,boolean isFree) {
         this.name = name;
         this.professors = professors;
         this.semester = semester;
+        this.isFree = isFree;
     }
 
     public Long getId() {
@@ -58,6 +68,22 @@ public class SubjectEntity {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isFree() {
+        return isFree;
+    }
+
+    public void setFree(boolean free) {
+        isFree = free;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setName(String name) {

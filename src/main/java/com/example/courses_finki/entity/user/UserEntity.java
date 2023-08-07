@@ -1,5 +1,6 @@
 package com.example.courses_finki.entity.user;
 
+import com.example.courses_finki.entity.cart.CoursesCart;
 import com.example.courses_finki.entity.subject.SubjectEntity;
 import jakarta.persistence.*;
 
@@ -19,6 +20,9 @@ public class UserEntity {
     @Column(name = "lastName")
     private String lastName;
 
+
+    @Column(name = "email")
+    private String email;
     @Column(name = "index", unique = true)
     private String username;
 
@@ -32,12 +36,18 @@ public class UserEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<SubjectEntity> subjects;
 
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<CoursesCart> carts;
+
+
     public UserEntity() {
     }
 
-    public UserEntity(String firstName, String lastName, String username, String password, UserRole role) {
+    public UserEntity(String firstName, String lastName,String username, String password, UserRole role) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@finki.ukim.mk";
         this.username = username;
         this.password = password;
         this.role = role;
@@ -57,6 +67,14 @@ public class UserEntity {
 
     public void setUsername(String index) {
         this.username = index;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

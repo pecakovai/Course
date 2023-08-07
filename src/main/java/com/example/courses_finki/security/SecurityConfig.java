@@ -30,7 +30,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests((requests) -> requests.requestMatchers("/login", "/index")
-                        .permitAll().anyRequest().authenticated())
+                        .permitAll()
+
+                        .anyRequest().authenticated())
                 .formLogin((form) -> form.loginPage("/login").permitAll().defaultSuccessUrl("/index"))
                 .logout((logout) -> logout.permitAll().logoutSuccessUrl("/index"))
                 .csrf(AbstractHttpConfigurer::disable);

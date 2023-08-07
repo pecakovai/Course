@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div th:replace="/layout/layout :: navbar-inside"></div>
+
+<br>
+
+<div class="container">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Action #1</th>
+        <th scope="col">Action #2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="subject, num : ${subjects}">
+        <th scope="row" th:text="${num.count}"></th>
+        <td th:text="${subject.name}"></td>
+        <td>
+            <form th:action="@{'/courses-cart/add-subject/{id}' (id=${subject.getId()})}"
+                  th:method="POST"
+                  sec:authorize="isAuthenticated()">
+                <button type="submit"
+                        class="btn btn-sm btn-primary ">
+                    <i class="fa-solid fa-cart-shopping"> &nbsp;&nbsp;Add subject to cart</i>
+                </button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{'/courses-cart/add-subject/{id}' (id=${subject.getId()})}"
+                  th:method="POST"
+                  sec:authorize="isAuthenticated()">
+                <button type="submit"
+                        class="btn btn-sm btn-success">
+                    <i class="fa-solid fa-credit-card">&nbsp;&nbsp; Buy course</i>
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+</body>
+</html>

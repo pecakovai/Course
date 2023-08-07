@@ -34,6 +34,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     }
 
+    @Override
+    public UserEntity findByUsername(String username) {
+        return this.userRepository.findByUsername(username).orElseThrow();
+    }
+
+    @Override
+    public UserEntity findById(Long id) {
+        return this.userRepository.findById(id).orElseThrow();
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

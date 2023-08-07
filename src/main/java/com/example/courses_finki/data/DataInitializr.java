@@ -39,9 +39,9 @@ public class DataInitializr {
         userRepository.save(user4);
         userRepository.save(user5);
 
-        SubjectEntity subject1 = new SubjectEntity("Operating Systems - 2022/2023");
-        SubjectEntity subject2 = new SubjectEntity("Databases - 2022/2023");
-        SubjectEntity subject3 = new SubjectEntity("Web Programming - 2022/2023");
+        SubjectEntity subject1 = new SubjectEntity("Operating Systems - 2022/2023",true,0.0);
+        SubjectEntity subject2 = new SubjectEntity("Databases - 2022/2023",false,50.0);
+        SubjectEntity subject3 = new SubjectEntity("Web Programming - 2022/2023",false,65.0);
 
         subjectRepository.save(subject1);
         subjectRepository.save(subject2);

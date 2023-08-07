@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div th:replace="/layout/layout :: navbar-inside"></div>
+
+<br>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Course</th>
+      <th scope="col">Student</th>
+      <th scope="col">Amount</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="subject, num : ${payments}">
+      <th scope="row" th:text="${num.count}"></th>
+      <td th:text="${subject.getMetadata().get('productName')}"></td>
+      <td th:text="${subject.getReceiptEmail()}"></td>
+      <td th:text="${subject.getAmount() / 100} + ${'$'}"></td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

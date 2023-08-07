@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div th:replace="~{/layout/layout :: navbar-inside}"></div>
+
+<br>
+
+<div class="container" th:if="${subjects.size() > 0}">
+  <div class="row">
+    <div class="col-12">
+      <form th:action="@{'/courses-cart/clear'}"
+            th:method="POST">
+        <button type="submit" class="btn btn-sm btn-danger delete-balloon"><i
+                class="fa fa-trash">&nbsp;&nbsp; Remove all courses</i>
+        </button>
+      </form>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Action #1</th>
+    <th scope="col">Action #2</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="subject, num : ${subjects}">
+    <th scope="row" th:text="${num.count}"></th>
+    <td th:text="${subject.name}"></td>
+    <td>
+      <form th:action="@{'/payment/{id}' (id=${subject.getId()})}"
+            th:method="GET"
+            sec:authorize="isAuthenticated()">
+        <button type="submit"
+                class="btn btn-sm btn-success">
+          <i class="fa-solid fa-credit-card"> &nbsp;&nbsp; Buy course</i>
+        </button>
+      </form>
+
+    </td>
+
+    <td>
+      <form th:action="@{'/courses-cart/remove-subject/{id}' (id=${subject.getId()})}"
+            th:method="POST"
+            sec:authorize="isAuthenticated()">
+        <button type="submit"
+                class="btn btn-sm btn-danger">
+          <i class="fa-solid fa-xmark"> </i>
+        </button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+      <form th:action="@{'/payment/all'}"
+            th:method="GET">
+        <button type="submit" class="btn btn-sm btn-success delete-balloon"><i
+                class="fa-solid fa-credit-card" th:text=" ${'  Buy all courses  '} + ${'(' + subjects.size() + ')'}"></i>
+        </button>
+      </form>
+</div>
+  </div>
+</div>
+
+<div class="container"  th:if="${subjects.size() <= 0}">
+  <h3>Nothing to show here </h3>
+  <a class="btn btn-success" href="/all-subjects">
+
+    <i class="fa-solid fa-credit-card"></i>&nbsp;&nbsp; Buy courses</a>
+</div>
+
+</body>
+</html>
